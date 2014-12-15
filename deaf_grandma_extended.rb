@@ -1,7 +1,7 @@
 # Deaf grandma won't hear you unless you shout to her, just make sure you shout BYE three times IN A ROW so you can leave the conversation.
 
 puts 'HI SON.'
-bye_counter 0
+bye_counter = 0
 
 while true
     response = gets.chomp
