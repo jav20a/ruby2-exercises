@@ -8,27 +8,43 @@ def find_remainder (dividend, quotient, divisor)
   return remainder
 end
 
-# roman_symbols = ['I', ]
+def get_numeral (decimal_places, quotient)
+  roman_symbols = {0 => ['I', 'V'], 1 => ['X', 'L'], 2 => ['C', 'D'], 3 => ['M']}
+  if quotient < 5
+    return roman_symbols[decimal_places][0] * quotient
+  else
+    return roman_symbols[decimal_places][1] + (roman_symbols[decimal_places][0] * (quotient - 5))
+  end
+end
 
 # ask for the number
 while true
+  puts ''
   puts 'Please type a whole number between 1 and 3000.'
+  puts '(To exit the program, hit enter on an empty line)'
   typed_number = gets.chomp
-
-  # check length
-
   decimal_places = typed_number.length
   dividend = typed_number.to_i
-  if dividend.between?(1, 300)
+  roman_numeral = ''
+  if decimal_places == 0
+    break
+  end
 
+  if dividend.between?(1, 3000)
     decimal_places.times do
       decimal_places = decimal_places - 1
       divisor = 10 ** decimal_places
-      quotient = find_divisor dividend, divisor
-      puts quotient
-      dividend = find_remainder dividend, quotient, divisor
+      if dividend > 0
+        quotient = find_divisor dividend, divisor
+
+        partial_numeral = get_numeral decimal_places, quotient
+        roman_numeral = roman_numeral + partial_numeral
+
+        dividend = find_remainder dividend, quotient, divisor
+      else
+        break
+      end
     end
-    return 'finished'
-    # construct and return the roman numeral
+    puts roman_numeral
   end
 end
