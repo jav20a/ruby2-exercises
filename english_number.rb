@@ -16,6 +16,18 @@ def english_number number
   #  write and left...get it?  :)
 
   left = number
+  write = left/1000000000 # How many billions left?
+  left = left - write*1000000000 # Subtract off those billions.
+
+  if write > 0
+    # Now here's the recursion:
+    billions = english_number write
+    num_string = num_string + billions + ' billion'
+    if left > 0
+      num_string = num_string + ' '
+    end
+  end
+
   write = left/1000000 # How many millions left?
   left = left - write*1000000 # Subtract off those millions.
 
@@ -91,4 +103,4 @@ def english_number number
   num_string
 end
 
-puts english_number(1222333)
+puts english_number(1222333444)
