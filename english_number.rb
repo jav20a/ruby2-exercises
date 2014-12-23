@@ -14,7 +14,20 @@ def english_number number
   #  "write" is the part we are
   #          writing out right now.
   #  write and left...get it?  :)
+
   left = number
+  write = left/1000000 # How many millions left?
+  left = left - write*1000000 # Subtract off those millions.
+
+  if write > 0
+    # Now here's the recursion:
+    millions = english_number write
+    num_string = num_string + millions + ' million'
+    if left > 0
+      num_string = num_string + ' '
+    end
+  end
+
   write = left/1000 # How many thousands left?
   left = left - write*1000 # Subtract off those thousands.
 
